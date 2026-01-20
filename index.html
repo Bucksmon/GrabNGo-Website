@@ -121,6 +121,91 @@
             transform: translateY(-2px);
         }
 
+        /* ===== NAV RESPONSIVE ===== */
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: transform .3s, opacity .3s;
+        }
+
+        /* Mobile menu */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 5vw;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(5, 5, 8, 0.92);
+                backdrop-filter: blur(14px);
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+                padding: 30px 0;
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .25s ease, transform .25s ease;
+            }
+
+            .nav-links a {
+                margin: 0;
+                font-size: 1.1rem;
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero p {
+                font-size: 1.05rem;
+            }
+
+            .phone {
+                width: 260px;
+                height: 520px;
+            }
+
+            section {
+                padding: 100px 6vw;
+            }
+        }
+
         /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
@@ -161,7 +246,6 @@
             transform: translateY(-5px);
         }
 
-        /* ===== APP MOCK ===== */
         /* ===== APP MOCK ===== */
         .mock {
             margin-top: 80px;
@@ -299,14 +383,23 @@
             <img src="bag.svg" />
             GRAB N GO
         </div>
-        <div>
-            <a href="#features">Features</a>
-            <a href="#how">How It Works</a>
-            <a href="#contact">Contact</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#how">How It Works</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <section class="hero">
+    <section id="home" class="hero">
         <div>
             <h1>Grab N Go!</h1>
             <p>Next-gen self-checkout that eliminates lines using scanning and real-time billing.</p>
@@ -368,13 +461,22 @@
     <section class="cta-strip" id="contact">
         <h2>Deploy Grab N Go in Your Store</h2>
         <p>Retail speed meets engineering precision.</p><br>
-        <a class="cta" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCKCGClBWljMQFPSMMtLjbHgcdRJknrXgjThLppJQfpNMbzhXklTfPjbZcsbkNjVpgzcHblB">Request Demo</a>
+        <a class="cta"
+            href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCKCGClBWljMQFPSMMtLjbHgcdRJknrXgjThLppJQfpNMbzhXklTfPjbZcsbkNjVpgzcHblB">Request
+            Demo</a>
     </section>
 
     <footer>
         Grab N Go © 2025 — Built to remove friction from reality.
     </footer>
+    <script>   
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
 
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+    </script>
 </body>
 
 </html>
